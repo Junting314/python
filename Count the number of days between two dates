@@ -1,0 +1,57 @@
+'''
+Author:Liu Junting
+Student Number:1619100060
+Date:2019-3-31
+Subject:Count the number of days between two dates
+Versions:2.0
+'''
+
+print('Count the number of days between two dates')
+print('date format:2019.3.30')
+date1 = input('Please input the first date:')
+date2 = input('Please input the second date:')
+
+y1 = int(date1.split('.',2)[0])
+y2 = int(date2.split('.',2)[0])
+
+m1 = int(date1.split('.',2)[1])
+m2 = int(date2.split('.',2)[1])
+
+d1 = int(date1.split('.',2)[2])
+d2 = int(date2.split('.',2)[2])
+
+a = 0
+for i in range(y1,y2-1):
+    if (i % 4) == 0 and (i % 100) != 0 or (i % 400) == 0:
+        a += 366
+    else:
+        a += 365
+
+if (y1 % 4) == 0 and (y1 % 100) != 0 or (y1 % 400) == 0:
+    A = [0,31,29,31,30,31,30,31,31,30,31,30,31]
+else:
+    A = [0,31,28,31,30,31,30,31,31,30,31,30,31]
+
+b = 0
+if m1 != 12:
+    for i in range(m1+1,13):
+        b += A[i]
+    b = b + A[m1] - d1
+else:
+    b = 31 - d1
+
+if (y2 % 4) == 0 and (y2 % 100) != 0 or (y2 % 400) == 0:
+    B = [0,31,29,31,30,31,30,31,31,30,31,30,31]
+else:
+    B = [0,31,28,31,30,31,30,31,31,30,31,30,31]
+
+c = 0
+if m2 != 1:
+    for i in range(1,m2):
+        c += B[i]
+    c = c + d2
+else:
+    c = d2
+
+sum = a + b + c
+print('the number of days between two dates:',sum)
