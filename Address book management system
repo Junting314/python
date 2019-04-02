@@ -1,0 +1,68 @@
+'''
+Author:Liu Junting
+Student Number:1619100060
+Date:2019-3-31
+Subject:Address book management system
+Versions:2.0
+'''
+
+#increase name and mobile number:Add
+def Add():
+    name = input('input name which you wan to add:')
+    number = int(input('input number:'))
+    book[name] = number
+    return book
+
+#delete name and mobile number:Delete
+def Delete():
+    name = input('input name which you wan to delete:')
+    del book[name]
+    return book
+
+#modification mobile number:Modification
+def Modification():
+    name = input('input name which you wan to modification:')
+    number = int(input('input number which you wan to modification:'))
+    book[name] = number
+    return book
+
+#search mobile number by name:Search
+def Search():
+    name = input('input name which you wan to seach:')
+    print(book[name])
+    return book
+
+#the function for judging whether or not to repeat
+def Judge():
+    print('MENU:')
+    print('Add:1  Delete:2  Modification:3  Search_all:4  Search:5  Exit:6')
+    f = float(input('Please input the number of function you want to run:'))
+    if (f != 1) and (f != 2) and (f != 3) and (f != 4) and (f != 5) and (f != 6):
+        print('=======Error=======')
+        Judge()
+    else:
+        if f == 1:
+            Add()
+            print(book)
+            Judge()
+        elif f == 2:
+            Delete()
+            print(book)
+            Judge()
+        elif f == 3:
+            Modification()
+            print(book)
+            Judge()
+        elif f == 4:  #show all name and number:Search_all
+            print(book)
+            Judge()
+        elif f == 5:
+            Search
+            Judge()
+        elif f == 6:
+            print('Exit')
+            print(book)
+
+book = {'police':110,'ambulance':120}
+print(book)
+Judge()
