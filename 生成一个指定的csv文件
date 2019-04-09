@@ -1,0 +1,23 @@
+'''
+Author:Liu Junting
+Student Number:1619100060
+Date:2019-4-9
+Subject:请尝试用大家学过的数据序列，生成一个CSV文件，在Excel中打开的结果指定
+Versions:2.0
+'''
+
+import pandas as pd
+
+No = [1,2,3,4,5]
+Name = ['mayi','jack','tom','rain','hanmeimei']
+Age = [18,21,25,19,23]
+Score = [99,89,95,80,81]
+
+dataframe = pd.DataFrame({'NO.':No,'Name':Name,'Age':Age,'Score':Score})
+dataframe.to_csv('test15.csv',index=False,sep=',')
+
+cols = ['No.','Name','Age','Score']
+dataframe = dataframe.ix[:,cols]     #表示DataFrame的行索引不变，列索引是cols中给定的索引frame.to_csv("test15.csv",index=False,sep=',')
+
+data = pd.read_csv('test15.csv')
+print(data)
