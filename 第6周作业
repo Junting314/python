@@ -1,0 +1,34 @@
+'''
+Author:Liu Junting
+Student Number:1619100060
+Date:2019-4-9
+Subject:随机产生50个数字，存一个列表中 list，然后从小到大排序，然后写入文件，然后从文件中读取出来文件内容，然后反序，在追加到文件的下一行中
+Versions:2.0
+'''
+
+import random
+
+a = []
+for _ in range(50):
+    a.append(int(random.random()*100))
+
+a.sort()
+f = open('1.txt','w')
+for i in a:
+    f.write(str(i)+',')
+
+f=open(r'1.txt')
+f.read()
+
+f=open('1.txt','a')
+f.write('\n')
+
+a.reverse()
+f=open('1.txt','a')
+for i in a:
+    f.write(str(i)+',')
+
+f=open(r'1.txt')
+f.read()
+
+f.close()
