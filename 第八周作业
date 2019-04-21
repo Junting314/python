@@ -1,0 +1,60 @@
+'''
+第八周python作业：2019.04.19
+物理161  1619100060  刘君婷
+'''
+
+'''
+题目：温度数据的曲线拟合
+
+下面是从1月开始阿拉斯加每个月的温度极值（摄氏度）：
+
+最大值: 17, 19, 21, 28, 33, 38, 37, 37, 31, 23, 19, 18
+
+最小值: -62, -59, -56, -46, -32, -18, -9, -13, -25, -46, -52, -58
+
+绘制这些温度极值。
+定义一个函数，可以描述温度的最大值和最小值。提示：这个函数的周期是一年。提示：包含时间偏移。
+用scipy.optimize.curve_fit()拟合这个函数与数据。
+绘制结果。这个拟合合理吗？如果不合理，为什么？
+最低温度和最高温度的时间偏移是否与拟合一样精确？
+'''
+
+import numpy as np 
+import pylab as pl
+from scipy.optimize import curve_fit
+
+month = np.linspace(1,12,12) 
+t = np.arange(1,13,0.1)
+Tmax = np.array([17, 19, 21, 28, 33, 38, 37, 37, 31, 23, 19, 18])
+Tmin = np.array([-62, -59, -56, -46, -32, -18, -9, -13, -25, -46, -52, -58])
+
+pl.rcParams['font.family'] = ['simHei']
+pl.rcParams['font.sans-serif'] = ['simHei']
+pl.rcParams['axes.unicode_minus'] = False
+pl.plot(month,Tmax,label='最高温度')
+pl.plot(month,Tmin,label='最低温度')
+pl.xlabel('月份')
+pl.ylabel('温度')
+pl.legend()
+
+def func(x,a,b,c,d):
+    return a*np.cos(b*x + c)+d
+
+fita1,fitb = curve_fit(func,month,Tmax)
+fita2,fitb = curve_fit(func,month,Tmin)
+print(fita1)
+print(fita2)
+
+pl.plot(t,func(t,fita1[0],fita1[1],fita1[2],fita1[3]),label='最高温度拟合线')
+pl.plot(t,func(t,fita2[0],fita2[1],fita2[2],fita2[3]),label='最低温度拟合线')
+
+pl.legend()
+pl.title('阿拉斯加每个月的温度极值（摄氏度）')
+pl.show()
+
+'''
+回答：
+这个拟合在这一年内（图中显示的12个月内）是合理的，
+但随着时间的偏移，该温度与时间的函数应该是每年周期重复
+而拟合的函数cos在下一年或者上一年的曲线并不符合真实情况
+'''
